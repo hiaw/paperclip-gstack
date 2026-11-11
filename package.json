@@ -1,0 +1,13 @@
+{
+  "name": "paperclip-gstack",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "refresh:gstack": "bun scripts/refresh-catalog.ts"
+  },
+  "dependencies": {
+    "yaml": "2.8.1"
+  }
+}

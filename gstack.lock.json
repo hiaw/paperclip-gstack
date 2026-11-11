@@ -1,0 +1,821 @@
+{
+  "schemaVersion": 1,
+  "repository": "garrytan/gstack",
+  "commit": "f0cd9f8c4b453c1eadd714e4149174ee01179eae",
+  "version": "1.99.0.0",
+  "policy": {
+    "scripts/discover-skills.ts": "3dd10d6bb630df7d59b6d259150103062615c57825a2261e87c531989c432e91",
+    "hosts/claude.ts": "346afa90c574d67bcff587f4be7cf90eb6f38366ff66d5a17a6f8adb48e279b6",
+    "bin/gstack-install-registry.sh": "cf523f833fb028e37e84d476987aac9d068b5ddebaff23b85551879e640b2ae6"
+  },
+  "capabilities": [
+    {
+      "name": "autoplan",
+      "template": "autoplan/SKILL.md.tmpl",
+      "rendered": "autoplan/SKILL.md",
+      "sha256": "ced691f913ac9d9b3d948582b3a95b1591c2cf084b83b2bfc8f2b5d6c7e3c6e6",
+      "hooks": true,
+      "owners": [
+        "cto"
+      ],
+      "disposition": "active bridge",
+      "description": "Auto-review pipeline — runs the CEO, design, eng (architecture, edge cases, failure modes, tests) and DX reviews (lean run: one reviewer), auto-deciding. (gstack)"
+    },
+    {
+      "name": "benchmark",
+      "template": "benchmark/SKILL.md.tmpl",
+      "rendered": "benchmark/SKILL.md",
+      "sha256": "8da9022b493820b03f7a304f4fd277cb4f70742cb7326a6d474bed472baba4af",
+      "hooks": false,
+      "owners": [
+        "qa-lead"
+      ],
+      "disposition": "active bridge",
+      "description": "Web performance regression detection. (gstack)"
+    },
+    {
+      "name": "benchmark-models",
+      "template": "benchmark-models/SKILL.md.tmpl",
+      "rendered": "benchmark-models/SKILL.md",
+      "sha256": "30bfd2614d615230ab73b0bfbe3da02b202f95b73dc97de58d311cdba285ee3a",
+      "hooks": false,
+      "owners": [
+        "cto"
+      ],
+      "disposition": "active bridge",
+      "description": "Cross-model benchmark for gstack skills. (gstack)"
+    },
+    {
+      "name": "browse",
+      "template": "browse/SKILL.md.tmpl",
+      "rendered": "browse/SKILL.md",
+      "sha256": "70e22467ca4bf5741ad7837635bc524e080709b83be094d62224ec9a55a628b5",
+      "hooks": false,
+      "owners": [
+        "qa-lead"
+      ],
+      "disposition": "active bridge",
+      "description": "Drive a real browser through Aside: open a page, read it, click through a flow, take screenshots, check console errors. (gstack)"
+    },
+    {
+      "name": "canary",
+      "template": "canary/SKILL.md.tmpl",
+      "rendered": "canary/SKILL.md",
+      "sha256": "a7fcc4fed7f3ea5e64e3604920052ce7cdc5cf9fea6a9cd3d4a93c328b119015",
+      "hooks": false,
+      "owners": [
+        "release-engineer"
+      ],
+      "disposition": "active bridge",
+      "description": "Post-deploy canary monitoring. (gstack)"
+    },
+    {
+      "name": "captain",
+      "template": "captain/SKILL.md.tmpl",
+      "rendered": "captain/SKILL.md",
+      "sha256": "2c5bccb07fa05fe19e042082173b9bc4789a4f82008a5b003839d566ad8f8709",
+      "hooks": false,
+      "owners": [],
+      "disposition": "Capy-specific; not Paperclip orchestration",
+      "description": "Run a crew of coding agents from one controller (also /crew): lanes send READY blocks and never merge; the controller merges through trains, keeps the digest, relays approvals, fixes flakes daily. (gstack)"
+    },
+    {
+      "name": "careful",
+      "template": "careful/SKILL.md.tmpl",
+      "rendered": "careful/SKILL.md",
+      "sha256": "f3dfed24accce14ad5d59a88f2f7f6aa21dc1b3b86416375b39268282807dfa3",
+      "hooks": true,
+      "owners": [
+        "ceo",
+        "cto",
+        "product-designer",
+        "devex-lead",
+        "implementation-engineer",
+        "staff-reviewer",
+        "qa-lead",
+        "security-officer",
+        "release-engineer"
+      ],
+      "disposition": "active bridge",
+      "description": "Safety guardrails for destructive commands. (gstack)"
+    },
+    {
+      "name": "claude-code",
+      "template": "claude-code/SKILL.md.tmpl",
+      "rendered": null,
+      "sha256": null,
+      "hooks": false,
+      "owners": [],
+      "disposition": "excluded by Claude host; template only",
+      "description": "Claude Code CLI second opinion for non-Claude Code hosts. Review a diff,\nchallenge a change for failure modes, or consult Claude with read-only repo\naccess and session continuity. Use for \"claude review\", \"claude challenge\",\n\"ask claude\", or an explicit Claude Code second opinion. (gstack)"
+    },
+    {
+      "name": "codex",
+      "template": "codex/SKILL.md.tmpl",
+      "rendered": "codex/SKILL.md",
+      "sha256": "ef381f326f4ec3dd27010eb77f94341ae12930f13f18f282e1f40d7d1e09023e",
+      "hooks": false,
+      "owners": [
+        "staff-reviewer"
+      ],
+      "disposition": "active bridge",
+      "description": "OpenAI Codex CLI wrapper — three modes. (gstack)"
+    },
+    {
+      "name": "context-restore",
+      "template": "context-restore/SKILL.md.tmpl",
+      "rendered": "context-restore/SKILL.md",
+      "sha256": "86e2a4ac539fee58f0a81c0c80c065373df5779886151ab71b28cd8927b7989a",
+      "hooks": false,
+      "owners": [
+        "cto"
+      ],
+      "disposition": "active bridge",
+      "description": "Restore working context saved earlier by /context-save. (gstack)"
+    },
+    {
+      "name": "context-save",
+      "template": "context-save/SKILL.md.tmpl",
+      "rendered": "context-save/SKILL.md",
+      "sha256": "8c182dd16eb524d41d8ece5497bd261ebb0cd65ff0d5e97d9a9dc236cf7b0e77",
+      "hooks": false,
+      "owners": [
+        "cto"
+      ],
+      "disposition": "active bridge",
+      "description": "Save working context. (gstack)"
+    },
+    {
+      "name": "cso",
+      "template": "cso/SKILL.md.tmpl",
+      "rendered": "cso/SKILL.md",
+      "sha256": "ebf891082d3384579d9099950a87eb84896263e8f9a0705779b6aecf9d3201d1",
+      "hooks": false,
+      "owners": [
+        "security-officer"
+      ],
+      "disposition": "active bridge",
+      "description": "Security audit: supported static findings; qualified profiles add reproduction and repair candidates. (gstack)"
+    },
+    {
+      "name": "design-consultation",
+      "template": "design-consultation/SKILL.md.tmpl",
+      "rendered": "design-consultation/SKILL.md",
+      "sha256": "095eaba207a3666515ee874955676de132cd34cc0d299cf84c1fd53a8c859cbc",
+      "hooks": false,
+      "owners": [
+        "product-designer"
+      ],
+      "disposition": "active bridge",
+      "description": "Design consultation: understands your product, researches the landscape, proposes a complete design system (aesthetic, typography, color, layout, spacing, motion), and generates font+color preview... (gstack)"
+    },
+    {
+      "name": "design-html",
+      "template": "design-html/SKILL.md.tmpl",
+      "rendered": "design-html/SKILL.md",
+      "sha256": "4e86d61838178a269b1d2e350a5600f78e350f6240e4b2073fb3ca4fcaa9e571",
+      "hooks": false,
+      "owners": [
+        "product-designer"
+      ],
+      "disposition": "active bridge",
+      "description": "Design finalization: generates production-quality Pretext-native HTML/CSS. (gstack)"
+    },
+    {
+      "name": "design-motion",
+      "template": "design-motion/SKILL.md.tmpl",
+      "rendered": "design-motion/SKILL.md",
+      "sha256": "06e1348924fae13d66fc9c1ecf99f373958b245c81021700ec9446f9bbe2b53a",
+      "hooks": false,
+      "owners": [
+        "product-designer"
+      ],
+      "disposition": "active bridge",
+      "description": "Design motion: animate an approved design into a seamless MP4 and GIF loop. (gstack)"
+    },
+    {
+      "name": "design-review",
+      "template": "design-review/SKILL.md.tmpl",
+      "rendered": "design-review/SKILL.md",
+      "sha256": "94aaf7e62f7925b158d928c0fc0589cda529eca28ecbeca5709f8d45d75492dc",
+      "hooks": false,
+      "owners": [
+        "product-designer"
+      ],
+      "disposition": "active bridge",
+      "description": "Designer's eye QA: finds visual inconsistency, spacing issues, hierarchy problems, AI slop patterns, and slow interactions — then fixes them; --build checks UI while you build it. (gstack)"
+    },
+    {
+      "name": "design-shotgun",
+      "template": "design-shotgun/SKILL.md.tmpl",
+      "rendered": "design-shotgun/SKILL.md",
+      "sha256": "8a6c5d60ffd0f60f895c641839b789bbf88421169c1917a22380c15b0751712a",
+      "hooks": false,
+      "owners": [
+        "product-designer"
+      ],
+      "disposition": "active bridge",
+      "description": "Design shotgun: generate multiple AI design variants, open a comparison board, collect structured feedback, and iterate. (gstack)"
+    },
+    {
+      "name": "deslop-shared-libs",
+      "template": "deslop-shared-libs/SKILL.md.tmpl",
+      "rendered": "deslop-shared-libs/SKILL.md",
+      "sha256": "13298bd1becd17b16b859775fad952754c3e870f4c0f44a2f39d05cd70af30b4",
+      "hooks": false,
+      "owners": [
+        "implementation-engineer"
+      ],
+      "disposition": "active bridge",
+      "description": "Find worthwhile shared-code extractions in recent work. (gstack)"
+    },
+    {
+      "name": "devex-review",
+      "template": "devex-review/SKILL.md.tmpl",
+      "rendered": "devex-review/SKILL.md",
+      "sha256": "8fb54bc0db63597aea9bbd390ae69d8b01b258746154b98e5373747acfa48664",
+      "hooks": false,
+      "owners": [
+        "devex-lead"
+      ],
+      "disposition": "active bridge",
+      "description": "Live developer experience audit. (gstack)"
+    },
+    {
+      "name": "diagram",
+      "template": "diagram/SKILL.md.tmpl",
+      "rendered": "diagram/SKILL.md",
+      "sha256": "b57372f3dfdbd0f7881d5d24baf6bbc02126b588c7177cf1fca2262c519cd0c2",
+      "hooks": false,
+      "owners": [
+        "release-engineer"
+      ],
+      "disposition": "active bridge",
+      "description": "Turn an English description (or mermaid source) into a diagram triplet: the source, an editable .excalidraw file you can open on excalidraw.com, and rendered SVG + PNG. (gstack)"
+    },
+    {
+      "name": "document-generate",
+      "template": "document-generate/SKILL.md.tmpl",
+      "rendered": "document-generate/SKILL.md",
+      "sha256": "5c549b6d216d58b9060b640b98888232904eae57956c335b3a0cdc257f2b9648",
+      "hooks": false,
+      "owners": [
+        "release-engineer"
+      ],
+      "disposition": "active bridge",
+      "description": "Generate missing documentation from scratch for a feature, module, or entire project. (gstack)"
+    },
+    {
+      "name": "document-release",
+      "template": "document-release/SKILL.md.tmpl",
+      "rendered": "document-release/SKILL.md",
+      "sha256": "e56f4fc7e8eada926ac19a7c7770295eb3249d892aceca02b36440fa54e2dc3b",
+      "hooks": false,
+      "owners": [
+        "release-engineer"
+      ],
+      "disposition": "active bridge",
+      "description": "Release documentation audit. (gstack)"
+    },
+    {
+      "name": "eval-plan",
+      "template": "eval-plan/SKILL.md.tmpl",
+      "rendered": "eval-plan/SKILL.md",
+      "sha256": "eb12e2d4a5ce9e51eef7529070dbc7892d7dca0ab3c702d620b73432c3e3e025",
+      "hooks": false,
+      "owners": [
+        "cto"
+      ],
+      "disposition": "active bridge",
+      "description": "Preregister a paid eval (bars, arms, decoys, stop rules), dry-run it at zero cost,\nthen run a three-item priced pilot whose spend table gates approval. (gstack)"
+    },
+    {
+      "name": "freeze",
+      "template": "freeze/SKILL.md.tmpl",
+      "rendered": "freeze/SKILL.md",
+      "sha256": "b3fd0406df9e7dc3c6522665a3205229beaadbe7bff82c94136fc51d76d054bd",
+      "hooks": true,
+      "owners": [
+        "ceo",
+        "cto",
+        "product-designer",
+        "devex-lead",
+        "implementation-engineer",
+        "staff-reviewer",
+        "qa-lead",
+        "security-officer",
+        "release-engineer"
+      ],
+      "disposition": "active bridge",
+      "description": "Restrict file edits to a specific directory for the session. (gstack)"
+    },
+    {
+      "name": "gstack-upgrade",
+      "template": "gstack-upgrade/SKILL.md.tmpl",
+      "rendered": "gstack-upgrade/SKILL.md",
+      "sha256": "a2c7925b29b5cd659c8c208272aa7f60298ae0d77a37baffe9cb9aa1a9c97c32",
+      "hooks": false,
+      "owners": [],
+      "disposition": "operator-only; reviewed company refresh required",
+      "description": "Upgrade gstack to the latest version."
+    },
+    {
+      "name": "guard",
+      "template": "guard/SKILL.md.tmpl",
+      "rendered": "guard/SKILL.md",
+      "sha256": "74417889d310a0c62cf0be65a88e056ee4709b8fcea20c73e33b323f39e8956c",
+      "hooks": true,
+      "owners": [
+        "ceo",
+        "cto",
+        "product-designer",
+        "devex-lead",
+        "implementation-engineer",
+        "staff-reviewer",
+        "qa-lead",
+        "security-officer",
+        "release-engineer"
+      ],
+      "disposition": "active bridge",
+      "description": "Full safety mode: destructive command warnings + directory-scoped edits. (gstack)"
+    },
+    {
+      "name": "health",
+      "template": "health/SKILL.md.tmpl",
+      "rendered": "health/SKILL.md",
+      "sha256": "749c979bcb203893452337f996551f6349aa506579ad70846322903a77b5f098",
+      "hooks": false,
+      "owners": [
+        "cto"
+      ],
+      "disposition": "active bridge",
+      "description": "Code quality dashboard. (gstack)"
+    },
+    {
+      "name": "investigate",
+      "template": null,
+      "rendered": null,
+      "sha256": null,
+      "hooks": false,
+      "owners": [],
+      "disposition": "retired and removed; not recreated",
+      "description": "Retired and removed upstream."
+    },
+    {
+      "name": "ios-clean",
+      "template": "ios-clean/SKILL.md.tmpl",
+      "rendered": "ios-clean/SKILL.md",
+      "sha256": "7989625496643213f8ca8054b1e60ada818bb61222de602a095cc4b011f10235",
+      "hooks": false,
+      "owners": [
+        "implementation-engineer"
+      ],
+      "disposition": "active bridge",
+      "description": "Remove the DebugBridge SPM package and all #if DEBUG wiring from an iOS app. (gstack)"
+    },
+    {
+      "name": "ios-design-review",
+      "template": "ios-design-review/SKILL.md.tmpl",
+      "rendered": "ios-design-review/SKILL.md",
+      "sha256": "202031ea0ade1efaad235cbc43ad4ff675119d77fc7de30a316f706f4aeb1b04",
+      "hooks": false,
+      "owners": [
+        "product-designer"
+      ],
+      "disposition": "active bridge",
+      "description": "Visual design audit for iOS apps on real hardware. (gstack)"
+    },
+    {
+      "name": "ios-fix",
+      "template": "ios-fix/SKILL.md.tmpl",
+      "rendered": "ios-fix/SKILL.md",
+      "sha256": "a7747b8081db22d0c69d1978ad4890ae9428eedd317697cd1850ed654951dd9f",
+      "hooks": false,
+      "owners": [
+        "implementation-engineer"
+      ],
+      "disposition": "active bridge",
+      "description": "Autonomous iOS bug fixer. (gstack)"
+    },
+    {
+      "name": "ios-qa",
+      "template": "ios-qa/SKILL.md.tmpl",
+      "rendered": "ios-qa/SKILL.md",
+      "sha256": "f2cb2344f3a38e530bec82cfed64825623a08cd3ba844cc87fa1ae9c39bd1adb",
+      "hooks": false,
+      "owners": [
+        "qa-lead"
+      ],
+      "disposition": "active bridge",
+      "description": "Live-device iOS QA for SwiftUI apps. (gstack)"
+    },
+    {
+      "name": "ios-sync",
+      "template": "ios-sync/SKILL.md.tmpl",
+      "rendered": "ios-sync/SKILL.md",
+      "sha256": "548831a24710ae4eb5ae5c41d08f4e9c64c62d7faad0154f77464ac17327e4c7",
+      "hooks": false,
+      "owners": [
+        "implementation-engineer"
+      ],
+      "disposition": "active bridge",
+      "description": "Regenerate the iOS debug bridge against the latest upstream gstack templates. (gstack)"
+    },
+    {
+      "name": "land-and-deploy",
+      "template": "land-and-deploy/SKILL.md.tmpl",
+      "rendered": "land-and-deploy/SKILL.md",
+      "sha256": "5082913d9df6d6c54e7a636347b5300637f4bb67770d298bd6b6f7743fb364b1",
+      "hooks": false,
+      "owners": [
+        "release-engineer"
+      ],
+      "disposition": "active bridge",
+      "description": "Land and deploy workflow. (gstack)"
+    },
+    {
+      "name": "landing-report",
+      "template": "landing-report/SKILL.md.tmpl",
+      "rendered": "landing-report/SKILL.md",
+      "sha256": "a62db3af3d867abc342d1aba410b60f43093cab3a056017cb480f211f4d26121",
+      "hooks": false,
+      "owners": [
+        "release-engineer"
+      ],
+      "disposition": "active bridge",
+      "description": "Read-only queue dashboard for workspace-aware ship. (gstack)"
+    },
+    {
+      "name": "learn",
+      "template": "learn/SKILL.md.tmpl",
+      "rendered": "learn/SKILL.md",
+      "sha256": "e8ff3004714bd957225cce7ba5b2c38f7d92d34ad5f10af24d40c664a5b98ee2",
+      "hooks": false,
+      "owners": [
+        "cto"
+      ],
+      "disposition": "active bridge",
+      "description": "Manage project learnings."
+    },
+    {
+      "name": "make-pdf",
+      "template": "make-pdf/SKILL.md.tmpl",
+      "rendered": "make-pdf/SKILL.md",
+      "sha256": "99103cf82f1b30fa2fe998bd17c906471c3892c5857286e68925071596467f91",
+      "hooks": false,
+      "owners": [
+        "release-engineer"
+      ],
+      "disposition": "active bridge",
+      "description": "Turn any markdown file into a publication-quality PDF. (gstack)"
+    },
+    {
+      "name": "modernize",
+      "template": "modernize/SKILL.md.tmpl",
+      "rendered": "modernize/SKILL.md",
+      "sha256": "6f114900512be92b3aefd3f3a52c93a8be10d0cb5fe1420ee305429e2a249568",
+      "hooks": false,
+      "owners": [
+        "release-engineer"
+      ],
+      "disposition": "active bridge",
+      "description": "Bring an aging PR onto its current base and decide: MODERNIZE, REWORK or CLOSE. (gstack)"
+    },
+    {
+      "name": "office-hours",
+      "template": "office-hours/SKILL.md.tmpl",
+      "rendered": "office-hours/SKILL.md",
+      "sha256": "3567c8d98afa05e526f7dcf7157f4d52812a238aa9b821f8f7c9381311939b88",
+      "hooks": false,
+      "owners": [
+        "ceo"
+      ],
+      "disposition": "active bridge",
+      "description": "YC Office Hours — two modes. (gstack)"
+    },
+    {
+      "name": "open-gstack-browser",
+      "template": "open-gstack-browser/SKILL.md.tmpl",
+      "rendered": "open-gstack-browser/SKILL.md",
+      "sha256": "2dd3227c8a8534415d5b4161bd9cf6ef5b542540e37d5d0e50dbb09b7eecbc10",
+      "hooks": false,
+      "owners": [
+        "qa-lead"
+      ],
+      "disposition": "active bridge",
+      "description": "Launch GStack Browser — AI-controlled Chromium with the sidebar extension baked in."
+    },
+    {
+      "name": "pair-agent",
+      "template": "pair-agent/SKILL.md.tmpl",
+      "rendered": "pair-agent/SKILL.md",
+      "sha256": "c0a7ad6716763625348e37ba12e94d306223f1eb8cb9be088c3043ebddb9bbbf",
+      "hooks": false,
+      "owners": [
+        "qa-lead"
+      ],
+      "disposition": "active bridge",
+      "description": "Pair a remote AI agent with your browser. (gstack)"
+    },
+    {
+      "name": "plan-ceo-review",
+      "template": "plan-ceo-review/SKILL.md.tmpl",
+      "rendered": "plan-ceo-review/SKILL.md",
+      "sha256": "46b7e0cfa8ede8204a416f40a482555e3325bba710594169307fbc25d709dd4f",
+      "hooks": true,
+      "owners": [
+        "ceo"
+      ],
+      "disposition": "active bridge",
+      "description": "CEO/founder-mode plan review. (gstack)"
+    },
+    {
+      "name": "plan-design-review",
+      "template": "plan-design-review/SKILL.md.tmpl",
+      "rendered": "plan-design-review/SKILL.md",
+      "sha256": "5934f10c95119c12e3fe785a9b33cdb608f6214f79a88ea84ac77cdfed6fb820",
+      "hooks": false,
+      "owners": [
+        "product-designer"
+      ],
+      "disposition": "active bridge",
+      "description": "Designer's eye plan review — interactive, like CEO and Eng review. (gstack)"
+    },
+    {
+      "name": "plan-devex-review",
+      "template": "plan-devex-review/SKILL.md.tmpl",
+      "rendered": "plan-devex-review/SKILL.md",
+      "sha256": "5586bde94063a2391e1733a8fcf2462b3226d6445cd958754b00a294f054b0c5",
+      "hooks": false,
+      "owners": [
+        "devex-lead"
+      ],
+      "disposition": "active bridge",
+      "description": "Interactive developer experience plan review. (gstack)"
+    },
+    {
+      "name": "plan-eng-review",
+      "template": "plan-eng-review/SKILL.md.tmpl",
+      "rendered": "plan-eng-review/SKILL.md",
+      "sha256": "58d96f6f3e296ccc2942e2e1a5732810b18f9f8bcd6ed9338115c99c91a88524",
+      "hooks": false,
+      "owners": [],
+      "disposition": "internal autoplan methodology; not registered",
+      "description": "Eng manager-mode plan review. (gstack)"
+    },
+    {
+      "name": "plan-tune",
+      "template": "plan-tune/SKILL.md.tmpl",
+      "rendered": "plan-tune/SKILL.md",
+      "sha256": "a4d01bb2b43ef9f649fb1932d850b733f81db1229ed01cc755f12f73bcfa26ed",
+      "hooks": false,
+      "owners": [
+        "cto"
+      ],
+      "disposition": "active bridge",
+      "description": "Self-tuning question sensitivity + developer psychographic for gstack (v1: observational). (gstack)"
+    },
+    {
+      "name": "qa",
+      "template": "qa/SKILL.md.tmpl",
+      "rendered": "qa/SKILL.md",
+      "sha256": "1cda78da8e01d074966334d1ff3c3103f1a78732f6d7ecf797df5b8cbf6ce540",
+      "hooks": false,
+      "owners": [
+        "qa-lead"
+      ],
+      "disposition": "active bridge",
+      "description": "Use when you test the site, API or CLI and fix bugs. (gstack)"
+    },
+    {
+      "name": "qa-only",
+      "template": "qa-only/SKILL.md.tmpl",
+      "rendered": "qa-only/SKILL.md",
+      "sha256": "1130fd5a80b02eea003d5cd8370e8eab524f2a6bf14a8caf262650ce64606c26",
+      "hooks": false,
+      "owners": [
+        "qa-lead"
+      ],
+      "disposition": "active bridge",
+      "description": "Report browser/API/CLI/job/worker/webhook bugs. (gstack)"
+    },
+    {
+      "name": "retro",
+      "template": "retro/SKILL.md.tmpl",
+      "rendered": "retro/SKILL.md",
+      "sha256": "8ce54989b9633e8bf6c79d9a3ddd8c2ddb3dc30e90c352858304a3ee844171ca",
+      "hooks": false,
+      "owners": [
+        "cto"
+      ],
+      "disposition": "active bridge",
+      "description": "Weekly engineering retrospective. (gstack)"
+    },
+    {
+      "name": "review",
+      "template": "review/SKILL.md.tmpl",
+      "rendered": "review/SKILL.md",
+      "sha256": "205ec3e52663cc918ad20e084bb70c3fd2b2d7a1eb60d3b63365483a9d6e9546",
+      "hooks": false,
+      "owners": [
+        "staff-reviewer"
+      ],
+      "disposition": "active bridge",
+      "description": "Use when you review this PR's diff. (gstack)"
+    },
+    {
+      "name": "router",
+      "template": "SKILL.md.tmpl",
+      "rendered": "SKILL.md",
+      "sha256": "7ec6f873de0a732ac57358eb47220c2f546bb29e08fe03bfe57a9ca295da907f",
+      "hooks": false,
+      "owners": [
+        "ceo",
+        "cto",
+        "product-designer",
+        "devex-lead",
+        "implementation-engineer",
+        "staff-reviewer",
+        "qa-lead",
+        "security-officer",
+        "release-engineer"
+      ],
+      "disposition": "active bridge",
+      "description": "Router for the gstack skill suite. (gstack)"
+    },
+    {
+      "name": "runaway-stopper",
+      "template": "runaway-stopper/SKILL.md.tmpl",
+      "rendered": "runaway-stopper/SKILL.md",
+      "sha256": "1d04520eb493cc09d109de66840678d85979b3b26aaec3e82a417545abdca15f",
+      "hooks": false,
+      "owners": [],
+      "disposition": "Capy-specific; not Paperclip orchestration",
+      "description": "Find runaway Capy threads and subagents, stop or rotate them safely, and prevent repeats. (gstack)"
+    },
+    {
+      "name": "scrape",
+      "template": "scrape/SKILL.md.tmpl",
+      "rendered": "scrape/SKILL.md",
+      "sha256": "79fd2bc6d9ba1f816f9200a747bbecd3c3a00abad59420e8b217f6d678c15b8f",
+      "hooks": false,
+      "owners": [
+        "qa-lead"
+      ],
+      "disposition": "active bridge",
+      "description": "Pull data from a web page through the Aside browser — your real, already signed-in sessions. (gstack)"
+    },
+    {
+      "name": "setup-browser-cookies",
+      "template": "setup-browser-cookies/SKILL.md.tmpl",
+      "rendered": "setup-browser-cookies/SKILL.md",
+      "sha256": "27bf14c11cb646e954e4bacf8bf0fdeeed676aa97624a87d4514b9249fc95714",
+      "hooks": false,
+      "owners": [
+        "qa-lead"
+      ],
+      "disposition": "active bridge",
+      "description": "Import cookies from your real Chromium browser into the headless browse session. (gstack)"
+    },
+    {
+      "name": "setup-deploy",
+      "template": "setup-deploy/SKILL.md.tmpl",
+      "rendered": "setup-deploy/SKILL.md",
+      "sha256": "8ab0cbf6b8ad04d27cfe2759984145eabf2a7e86a98610145aa8a764ad12161e",
+      "hooks": false,
+      "owners": [
+        "release-engineer"
+      ],
+      "disposition": "active bridge",
+      "description": "Configure deployment settings for /land-and-deploy."
+    },
+    {
+      "name": "setup-gbrain",
+      "template": "setup-gbrain/SKILL.md.tmpl",
+      "rendered": "setup-gbrain/SKILL.md",
+      "sha256": "8987a75d571cd0fb174312a37318ea02b2f20ab881daed641a13a945b9cc540f",
+      "hooks": false,
+      "owners": [
+        "cto"
+      ],
+      "disposition": "active bridge",
+      "description": "Set up gbrain for this coding agent: install the CLI, initialize a local PGLite or Supabase brain, register MCP, capture per-remote trust policy. (gstack)"
+    },
+    {
+      "name": "ship",
+      "template": "ship/SKILL.md.tmpl",
+      "rendered": "ship/SKILL.md",
+      "sha256": "11e3d5afd7742b5665c013d8dbf5139454ee22d919a2571c10c86e18f4c36ff6",
+      "hooks": false,
+      "owners": [
+        "release-engineer"
+      ],
+      "disposition": "active bridge",
+      "description": "Ship it: merge the base, run tests, review the diff, bump VERSION and CHANGELOG, push and create a PR. (gstack)"
+    },
+    {
+      "name": "skillify",
+      "template": "skillify/SKILL.md.tmpl",
+      "rendered": "skillify/SKILL.md",
+      "sha256": "7bd167e3c23263205678221dd1f68d94799f3bdec9648b320f6033330aa82224",
+      "hooks": false,
+      "owners": [
+        "qa-lead"
+      ],
+      "disposition": "active bridge",
+      "description": "Codify the most recent successful /scrape flow into a permanent browser-skill on disk. (gstack)"
+    },
+    {
+      "name": "spec",
+      "template": "spec/SKILL.md.tmpl",
+      "rendered": "spec/SKILL.md",
+      "sha256": "00982f096f9050a5dfdacf9fee8dc300648966e9b0da8c3eed74c06be1ff9ea2",
+      "hooks": false,
+      "owners": [
+        "ceo"
+      ],
+      "disposition": "active bridge",
+      "description": "Turn vague intent into a precise, executable spec in five phases. (gstack)"
+    },
+    {
+      "name": "sync-gbrain",
+      "template": "sync-gbrain/SKILL.md.tmpl",
+      "rendered": "sync-gbrain/SKILL.md",
+      "sha256": "4634d5375b027c55d91626415344fbb58e7b540d974fa90e1fd2144f9ab8b2ab",
+      "hooks": false,
+      "owners": [
+        "cto"
+      ],
+      "disposition": "active bridge",
+      "description": "Keep gbrain current with this repo's code and refresh agent search guidance in CLAUDE.md. (gstack)"
+    },
+    {
+      "name": "test-audit",
+      "template": "test-audit/SKILL.md.tmpl",
+      "rendered": "test-audit/SKILL.md",
+      "sha256": "cb4ff35da3597515f67e2512e90357083599669017ea6cc2533964c390b930c2",
+      "hooks": false,
+      "owners": [
+        "staff-reviewer"
+      ],
+      "disposition": "active bridge",
+      "description": "Find low-value or duplicate tests and the test-only code they keep alive. (gstack)"
+    },
+    {
+      "name": "ubicloud",
+      "template": "ubicloud/SKILL.md.tmpl",
+      "rendered": "ubicloud/SKILL.md",
+      "sha256": "ec572db35591c794c6aba8fb3e32f539a98d7cd08ed15829d1a71efd39561a23",
+      "hooks": false,
+      "owners": [
+        "cto"
+      ],
+      "disposition": "active bridge",
+      "description": "Run a heavy suite, build or eval on an ephemeral 16-vCPU Ubicloud VM: TTL-named VMs, a reaper, quota preflight and a hang watchdog. (gstack)"
+    },
+    {
+      "name": "unfreeze",
+      "template": "unfreeze/SKILL.md.tmpl",
+      "rendered": "unfreeze/SKILL.md",
+      "sha256": "8c73bb497362fa32f37a961e749714c2c7fa7ffa1d4664e0ce54fec3da188245",
+      "hooks": false,
+      "owners": [
+        "ceo",
+        "cto",
+        "product-designer",
+        "devex-lead",
+        "implementation-engineer",
+        "staff-reviewer",
+        "qa-lead",
+        "security-officer",
+        "release-engineer"
+      ],
+      "disposition": "active bridge",
+      "description": "Clear the freeze boundary set by /freeze, allowing edits to all directories again. (gstack)"
+    },
+    {
+      "name": "verify",
+      "template": "verify/SKILL.md.tmpl",
+      "rendered": "verify/SKILL.md",
+      "sha256": "7796b61ac09d3047b191ef8d0ab772e804cbb73abcd98dcb64b09fb8eae3cb84",
+      "hooks": false,
+      "owners": [
+        "implementation-engineer"
+      ],
+      "disposition": "active bridge",
+      "description": "Use when coding: run the checks and tests /ship picks until green. (gstack)"
+    },
+    {
+      "name": "write-skill",
+      "template": "write-skill/SKILL.md.tmpl",
+      "rendered": "write-skill/SKILL.md",
+      "sha256": "7ec2e96715c5f3097014a777d93b68646f1775d52fabd8a78397e976bd1dfbc7",
+      "hooks": false,
+      "owners": [
+        "implementation-engineer"
+      ],
+      "disposition": "active bridge",
+      "description": "Write a new agent skill or improve one without bloat: the edit ladder, levels, drift and size checks, full diets. (gstack)"
+    }
+  ]
+}
