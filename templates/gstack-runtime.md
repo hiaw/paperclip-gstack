@@ -79,10 +79,18 @@ Only after identity and tracked cleanliness pass, inspect the upstream configura
 ```sh
 "$R/bin/gstack-paths" --get GSTACK_STATE_ROOT
 for key in auto_upgrade team_mode update_check update_channel telemetry artifacts_sync_mode skill_prefix disabled_skills claude_loadout claude_overlay_model plan_mode_preamble codex_reviews; do
-  printf '%s effective: ' "$key"
-  "$R/bin/gstack-config" get "$key" || exit
-  printf '%s stored: ' "$key"
-  "$R/bin/gstack-config" get --stored "$key" || exit
+  stored=$("$R/bin/gstack-config" get --stored "$key") || exit
+  if effective=$("$R/bin/gstack-config" get "$key"); then
+    :
+  else
+    rc=$?
+    # At this pin disabled_skills has no default: absent/empty is no disabled skills.
+    if [ "$key" != "disabled_skills" ] || [ "$stored" != "unset" ] || [ "$rc" -ne 1 ] || [ -n "$effective" ]; then
+      exit "$rc"
+    fi
+    effective=""
+  fi
+  printf '%s effective: %s; stored: %s\n' "$key" "$effective" "$stored"
 done
 "$R/setup" --status
 "$R/bin/gstack-doctor"
@@ -90,7 +98,7 @@ done
 
 Require effective `auto_upgrade=false`, `team_mode=false`, `update_check=false`, `telemetry=off`, `artifacts_sync_mode=off`, and short-name `skill_prefix=false`; the loadout must be full (`full` or its unset full default). Record `update_channel` but never use a main/stable channel or available-update notice as authority to move the literal pin. Inspect effective Claude settings, project-local settings, and any plugin/session configuration for active updater hooks or foreign registrations that could override this policy. Check relevant `GSTACK_*`, `CLAUDE_CONFIG_DIR` and state-root environment overrides without dumping secrets. A contradictory rolling updater or unreadable/unknown configuration blocks; do not silently rewrite it. Upstream doctor fix suggestions to upgrade/reinstall are diagnostics, not authority.
 
-Consult `bin/gstack-config get disabled_skills` for every requested capability, normalizing its comma/whitespace-separated names and optional `gstack-` prefix. If the canonical command is disabled, **stop** even when its source still exists. Do not invoke a hidden retained method, turn the skill back on, or use Read-and-follow to evade the operator's choice.
+Consult `bin/gstack-config get disabled_skills` for every requested capability, normalizing its comma/whitespace-separated names and optional `gstack-` prefix. At this pin an absent/empty setting returns empty output with exit 1 because the key has no default; accept that as no disabled skills only when `get --stored disabled_skills` succeeds with `unset`, as above. Other read failures block. If the canonical command is disabled, **stop** even when its source still exists. Do not invoke a hidden retained method, turn the skill back on, or use Read-and-follow to evade the operator's choice.
 
 `./setup --status` is read-only and checks install/section-link status. Plain `bin/gstack-doctor` reports readiness without a paid call; preserve warnings and `not configured` rows as such, rather than treating exit 0 as all tooling ready. Do **not** use `--live` without paid-probe authority. Do not use a browser ensure/install helper or a component check that launches/downloads a browser as a readiness shortcut. Browser execution is a separate authorized smoke/task action. Required missing tooling blocks its workflow; optional CSO/container, outside-provider, GBrain, cloud, mobile and browser-session capabilities remain unavailable until their actual prerequisites and authority exist.
 
